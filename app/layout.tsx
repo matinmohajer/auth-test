@@ -1,23 +1,17 @@
-"use client";
-import "./globals.css";
-import { ReactNode } from "react";
-import { AuthProvider } from "../context/AuthContext";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import '@/styles/globals.scss';
+import { ReactNode } from 'react';
+import Providers from './providers';
 
-// Create a single QueryClient instance for the app
-const queryClient = new QueryClient();
-
-export const meta = {
-  title: "Auth Demo",
+export const metadata = {
+  title: 'Auth | Dashboard Demo',
+  description: 'Simple auth flow with Next 15',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="fa">
+    <html lang="en">
       <body>
-        <QueryClientProvider client={queryClient}>
-          <AuthProvider>{children}</AuthProvider>
-        </QueryClientProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

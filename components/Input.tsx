@@ -1,19 +1,21 @@
-"use client";
-import React from "react";
-import styles from "../styles/Input.module.scss";
+'use client';
 
-interface InputProps {
-  label: string;
-  error?: string;
-  [x: string]: any;
+import { ForwardedRef, forwardRef, InputHTMLAttributes } from 'react';
+import styles from './Input.module.scss';
+
+type Props = InputHTMLAttributes<HTMLInputElement>;
+
+function InputBase(
+  { className, ...rest }: Props,
+  ref: ForwardedRef<HTMLInputElement>,
+) {
+  return (
+    <input
+      ref={ref}
+      className={`${styles.input} ${className ?? ''}`}
+      {...rest}
+    />
+  );
 }
 
-const Input: React.FC<InputProps> = ({ label, error, ...props }) => (
-  <div className={styles.wrapper}>
-    <label className={styles.label}>{label}</label>
-    <input className={styles.input} {...props} />
-    {error && <p className={styles.error}>{error}</p>}
-  </div>
-);
-
-export default Input;
+export const Input = forwardRef(InputBase);

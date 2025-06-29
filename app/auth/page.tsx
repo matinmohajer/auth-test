@@ -1,50 +1,25 @@
-"use client";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema } from "../../schemas/auth";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
-import { useAuth } from "../../hooks/useAuth";
-import { useRouter } from "next/navigation";
+'use client';
 
-type FormData = {
-  phone: string;
-};
+import AuthForm from '@/components/AuthForm';
+import { useAuth } from '@/lib/hooks/useAuth';
+import { useRouter } from 'next/navigation';
+import styles from './Auth.module.scss';
+import { useEffect } from 'react';
+import faData from "@/lib/fa.json";
 
 export default function AuthPage() {
+  const { isLoggedIn } = useAuth();
   const router = useRouter();
-  const { login, isLoading, user } = useAuth();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(loginSchema) });
-
-  const onSubmit = async (data: FormData) => {
-    await login(data.phone);
-    router.push("/");
-  };
-
-  React.useEffect(() => {
-    if (user) router.replace("/");
-  }, [user, router]);
+  useEffect(() => {
+    if (isLoggedIn) router.replace('/dashboard');
+  }, [isLoggedIn, router]);
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto", padding: "2rem" }}>
-      <h1>ورود</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          label="شماره تلفن"
-          placeholder="09xxxxxxxxx"
-          {...register("phone")}
-          error={errors.phone?.message}
-        />
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? "در حال ورود..." : "ورود"}
-        </Button>
-      </form>
-    </div>
+    <main className={styles.container}>
+      <section className={styles.card}>
+        <h1>{faData.login}</h1>
+        <AuthForm />
+      </section>
+    </main>
   );
 }

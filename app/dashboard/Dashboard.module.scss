@@ -1,0 +1,53 @@
+/* app/dashboard/Dashboard.module.scss */
+.wrapper {
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: clamp(1rem, 4vw, 3rem);     // scales with viewport
+  }
+  
+  .card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: clamp(1.5rem, 5vw, 3rem);
+    width: 100%;
+    max-width: 28rem;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(#000, 0.05);
+  
+    /* slightly larger layout on laptops/desktops */
+    @media (min-width: 640px) {
+      gap: 1.75rem;
+      max-width: 32rem;
+    }
+  }
+  
+  .avatar {
+    border-radius: 50%;
+    border: 3px solid #6366f1;
+    width: clamp(64px, 20vw, 96px);
+    height: clamp(64px, 20vw, 96px);
+    object-fit: cover;
+  }
+  
+  .heading {
+    font-size: clamp(1.25rem, 4.5vw, 1.75rem);
+    font-weight: 700;
+  }
+  
+  .email {
+    font-size: clamp(0.875rem, 3.5vw, 1rem);
+    color: #4b5563;
+    word-break: break-all;          // prevents overflow on very small screens
+  }
+  
+  .logout {
+    width: 100%;
+  }
+  

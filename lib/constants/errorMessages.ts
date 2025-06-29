@@ -1,0 +1,5 @@
+export const AUTH_CONTEXT_ERR = "AuthContext out of scope"
+export const NETWORK_ERR = "Network error"
+export const API_CONFIG_ERR = "API endpoint not configured"
+export const PHONE_NUMBER_ERR = "شماره معتبر نیست"
+export const PHONE_MIN_DIGIT_ERR = "شماره حداقل ۱۰ رقم است"

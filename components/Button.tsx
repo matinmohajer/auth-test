@@ -1,15 +1,16 @@
-"use client";
-import React from "react";
-import styles from "../styles/Button.module.scss";
+'use client';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
+import { ButtonHTMLAttributes, ReactNode } from 'react';
+import styles from './Button.module.scss';
+import faData from "@/lib/fa.json"
+
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+  loading?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, ...props }) => (
-  <button className={styles.btn} {...props}>
-    {children}
+export const Button = ({ children, loading, ...rest }: Props) => (
+  <button {...rest} className={styles.btn} disabled={loading || rest.disabled}>
+    {loading ? faData.Loading : children}
   </button>
 );
-
-export default Button;
